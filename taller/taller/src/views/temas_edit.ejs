@@ -1,0 +1,31 @@
+<% include partials/_header %>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-5">
+			<div class="card-body">
+			<%=console.log(data.id_alumno);%>
+				<form action="/updateTema/<%= data.id_tema %>" method="post" accept-charset="utf-8">
+					<div class= "form-group">
+					<input type="text" name="titulo"  value="<%= data.titulo %>" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="observaciones" value="<%= data.observaciones %>" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="id_alumno" value="<%= idAl%>" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="fecha_observaciones" value="<%= date= new Date(Date.now()).toISOString();%>" class = "form-control">
+				</div>
+				<button type="submit" class="btn btn-primary">
+				Actualizar
+				</button>
+				</form>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+<% include partials/_footer %>

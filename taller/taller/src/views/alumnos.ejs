@@ -1,0 +1,83 @@
+<% include partials/_header %>
+
+<div class= "">
+	<div class = "row mt-5">
+		<div class="col-md-7">
+			<table class= "table table-bordered table-hover">
+			<thread>
+				<tr>
+					<th>n°</th>
+					<th>Nombre</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>CI</th>
+					<th>CU</th>
+					<th>Carrera</th>
+					
+					<th>Acciones</th>
+				</tr>
+			</thread>
+			<tbody>
+				<% if (data) { %>
+					<% for (var i=0; i <data.length; i++){ %>
+						<tr>
+							<td> <%= (i+1) %></td>
+							<td><%= data[i].nombre %></td>
+							<td><%= data[i].apellidoPaterno %></td>
+							<td><%= data[i].apellidoMaterno%></td>
+							<td><%= data[i].ci%></td>
+							<td><%= data[i].cu %></td>
+							<td><%= data[i].carrera %></td>
+							
+							<td> <a href="/delete/<%= data[i].id_alumno %>" class="btn btn-danger">Eliminar</a>
+							<a href="/update/<%= data[i].id_alumno %>" class="btn btn-info">Actualizar</a>
+							<a href="/tema/<%= data[i].id_alumno %>" class="btn btn-info">Agregar tema</a>
+							</td>
+						</tr>
+					<% } %>
+
+				<% } %>
+			</tbody>
+			</table>
+
+		</div>
+
+		<div class="col-md-5">
+			<div class="card">
+				<div class="card-body">
+					<form action="/add" method= "post">
+				<div class= "form-group">
+					<input type="text" name="nombre" placeholder ="Nombre" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="apellidoPaterno" placeholder ="Apellido Paterno" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="apellidoMaterno" placeholder ="Apellido Materno" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="ci" placeholder ="CI" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="cu" placeholder ="CU" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="carrera" placeholder ="Carrera" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="created_at" value=<%=new Date().toJSON().slice(0,10); %> class = "form-control">
+				</div>
+				<button type="submit" class="btn btn-primary">
+				Guardar
+				</button>
+				
+		</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+<% include partials/_footer %>

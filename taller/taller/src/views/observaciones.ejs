@@ -1,0 +1,74 @@
+<% include partials/_header %>
+
+<div class= "">
+	<div class = "row mt-5">
+		<div class="col-md-7">
+			<table class= "table table-bordered table-hover">
+			<thread>
+				<tr>
+					<th>n°</th>
+					
+					<th>Observaciones</th>
+					<th>Fecha</th>
+					<th>Resuelta</th>
+					<th>Archivos</th>
+					<th>Acciones</th>
+				</tr>
+			</thread>
+			<tbody>
+				<% if (data) { %>
+					<% for (var i=0; i <data.length; i++){ %>
+						<tr>
+							<td> <%= (i+1) %></td>
+							<td><%= data[i].observacion %></td>
+							<td><%= data[i].fecha_observacion %></td>
+							<td><%= data[i].status %></td>
+							<td>
+							<%= data[i].archivos %>
+							</td>
+							<td>
+							<a href="/subirArchivo/<%= data[i].id_observacion %>/<%=data[i].id_tema %> " class="btn btn-info">Subir Archivo</a>
+							
+							<a href="/updateStatus/<%= data[i].id_observacion%>/<%=data[i].id_tema %>" class="btn btn-info">Completada</a></td>
+						</tr>
+					<% } %>
+
+				<% } %>
+			</tbody>
+			</table>
+
+		</div>
+
+		<div class="col-md-5">
+			<div class="card">
+				<div class="card-body">
+					<form action="/saveObservaciones" method= "post">
+				<div class= "form-group">
+					<input type="text" name="observacion" placeholder ="observacion" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="status" value="0">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="fecha_observacion" value=<%= 
+					date= new Date(Date.now()).toISOString();
+					%>>
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="id_tema" value=<%= 
+					id_tema
+					%>>
+				</div>
+				<button type="submit" class="btn btn-primary">
+				Guardar
+				</button>
+		</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+<% include partials/_footer %>
