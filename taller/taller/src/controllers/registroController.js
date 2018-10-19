@@ -2,12 +2,14 @@ const controller = {};
 
 controller.list = (req,res) =>{
 	req.getConnection((err, conn)=>{
-		conn.query('SELECT * FROM registro', (err, registro) =>{
+		const id=req.params.idTema;
+		conn.query('SELECT * FROM registro WHERE id_tema=?',[id], (err, registro) =>{
 			if (err){
 				res.json(err);
 			}
 			res.render('registroavance',{
-				data: registro
+				data: registro,
+				id_tema:id
 			});
 		});
 	});

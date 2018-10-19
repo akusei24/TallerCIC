@@ -28,7 +28,7 @@ router.post('/updateTema/(:id)',temasController.updateTema);
 router.get('/observaciones/(:id)',temasController.listObservaciones);
 router.post('/saveObservaciones',temasController.saveObservaciones);
 router.get('/updateStatus/(:id)/(:idTema)',temasController.updateStatus);
-router.get('/subirArchivo/(:id)/(:idTema)',temasController.subirArchivo);
+router.get('/subirArchivo/(:idTema)',temasController.subirArchivo);
 router.post('/upload/(:idTema)',temasController.upload);
 
 //Ventana registros

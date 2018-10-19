@@ -24,7 +24,6 @@ controller.listTema=(req,res)=>{
 			conn.query('SELECT * FROM alumnos WHERE id_alumno = ?',[id],(err,alumno)=>{
 			res.render('temas',{data:temas, id_alumno:id, alumno:alumno[0]});
 		});
-			
 
 		});
 	});
@@ -117,18 +116,29 @@ controller.updateStatus=(req,res)=>{
 controller.upload=(req,res)=>{
 	
 	const {idTema}=req.params;
-	let EDFile = req.files.file
+	var datos=req.body;
+
+	console.log(datos);
+	let EDFile = req.files.archivo;
+	console.log(EDFile.name);
     EDFile.mv(`./uploads/${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
         //return res.status(200).send({ message : 'File upload' })
-    	return res.redirect('/observaciones/'+idTema);
+    	datos["archivo"]="./uploads/"+EDFile.name;
+    	req.getConnection((err,conn)=>{
+    		conn.query('INSERT  INTO registro set  ? ',[datos],(err,rows)=>{
+    		res.redirect('/registroavance/'+idTema);
+    	});
+    	
+    	});
+    	
     });
 };
 controller.subirArchivo=(req,res)=>{
 	const {id}=req.params;
 	const {idTema}=req.params;
-	res.render('upload',{idObservacion:id,idTema:idTema});
+	res.render('upload',{idTema:idTema});
 };
 
 module.exports = controller;
