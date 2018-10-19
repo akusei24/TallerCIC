@@ -1,31 +1,71 @@
 <% include partials/_header %>
 
 <div class= "">
-	<div class="col-md-5">
+	<div class="row">
+	<div class="col">
+		<div class="row mt-2">
+		
+	
+	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
-				<div class="form-group">
-					<input type="text" name="nombre"  value="<%= alumno.nombre %> <%= alumno.apellidoPaterno %> <%= alumno.apellidoMaterno %>" class = "form-control" readonly>
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							<label for="nombre">Nombre</label>
+							<input type="text" name="nombre"  value="<%= alumno.nombre %> <%= alumno.apellidoPaterno %> <%= alumno.apellidoMaterno %>" class = "form-control" readonly>
+						</div>
+					</div>
+					<div class="col">
+						<label for="ci">CI</label>
+						<div class= "form-group" >
+							<input type="text" name="ci" value="<%= alumno.ci %>" class = "form-control" readonly>
+						</div>
+					</div>
+					<div class="col">
+						<label for="ci">CU</label>
+						<div class= "form-group">
+						<input type="text" name="cu" value="<%= alumno.cu %>" class = "form-control" readonly>
+						</div>
+					</div>
 				</div>
-				
-				<div class= "form-group">
-					<input type="text" name="ci" value="<%= alumno.ci %>" class = "form-control" readonly>
-				</div>
-				<div class= "form-group">
-					<input type="text" name="cu" value="<%= alumno.cu %>" class = "form-control" readonly>
-				</div>
-				<div class= "form-group">
-					<input type="text" name="carrera" value="<%= alumno.carrera %>" class = "form-control" readonly>
-				</div>
-				<div class= "form-group">
-					<input type="text" name="celular" value="<%= alumno.celular %>" class = "form-control" readonly>
-				</div>
-				<div class= "form-group">
-					<input type="text" name="correo" value="<%= alumno.correo %>" class = "form-control" readonly>
-				</div>
+				<div class="row">
+					<div class="col">
+						<label for="carrera">Carrera</label>
+						<div class= "form-group">
+						<input type="text" name="carrera" value="<%= alumno.carrera %>" class = "form-control" readonly>
+						</div>
+					</div>
+					<div clas="col">
+						<label for="celular">Celular</label>
+						<div class= "form-group">
+						<input type="text" name="celular" value="<%= alumno.celular %>" class = "form-control" readonly>
+						</div>
+					</div>
+					<div clas="col">
+						<label for="correo">Correo</label>
+						<div class= "form-group">
+						<input type="text" name="correo" value="<%= alumno.correo %>" class = "form-control" readonly>
+						</div>
+					</div>
+				</div>		
 			</div>
 		</div>
 	</div>
+	</div>
+	</div>
+	<div class="col">
+		<div class="row mt-5">
+		<div class="col-md-2">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-agregar">
+					  Agregar Tema
+					</button>
+		
+					</div>
+		</div>
+	</div>
+	</div>
+	
 	<div class = "row mt-5">
 		<div class="col-md-7">
 			<table class= "table table-bordered table-hover">
@@ -64,6 +104,48 @@
 		
 
 	</div>
+</div>
+<div class="modal fade" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Tema</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+			<div class="card">
+				<div class="card-body">
+					<form action="/saveTema" method= "post">
+				<div class= "form-group">
+					<input type="text" name="titulo" placeholder ="Titulo" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="observaciones" placeholder ="Observaciones" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="fecha_observaciones" value=<%= 
+					date= new Date(Date.now()).toISOString();
+					%>>
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="id_alumno" value=<%= 
+					id_alumno
+					%>>
+				</div>
+				<div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
+			      </div>
+				</form>
+				</div>
+			</div>
+      </div>
+
+      
+    </div>
+  </div>
 </div>
 
 <% include partials/_footer %>
