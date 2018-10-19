@@ -1,19 +1,35 @@
 <% include partials/_header %>
 
-<div class= "">
-	<div class = "row mt-5">
-		<div class="col-md-7">
+<div>
+	<div class ="row mt-2">
+			<div class="col-md-12">
+				<div class="form-inline">
+				<div class="col-md-10">
+				<h2>Tabla de Estudiantes</h2>
+				</div>
+					<div class="col-md-2">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-agregar">
+					  Agregar Alumno
+					</button>
+
+					</div>
+				</div>
+			</div>
+	</div>
+	<div class = "row mt-2">
+		<div class="col-md-12">
 			<table class= "table table-bordered table-hover">
 			<thread>
 				<tr>
-					<th>n°</th>
+					<th>N°</th>
 					<th>Nombre</th>
 					<th>Apellido Paterno</th>
 					<th>Apellido Materno</th>
 					<th>CI</th>
 					<th>CU</th>
 					<th>Carrera</th>
-					
+					<th>Celular</th>
+					<th>Correo</th>				
 					<th>Acciones</th>
 				</tr>
 			</thread>
@@ -28,6 +44,8 @@
 							<td><%= data[i].ci%></td>
 							<td><%= data[i].cu %></td>
 							<td><%= data[i].carrera %></td>
+							<td><%= data[i].celular %></td>
+							<td><%= data[i].correo %></td>
 							
 							<td> <a href="/delete/<%= data[i].id_alumno %>" class="btn btn-danger">Eliminar</a>
 							<a href="/update/<%= data[i].id_alumno %>" class="btn btn-info">Actualizar</a>
@@ -39,10 +57,20 @@
 				<% } %>
 			</tbody>
 			</table>
+		</div>		
+	</div>
+</div>
 
-		</div>
-
-		<div class="col-md-5">
+<div class="modal fade" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Alumno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 			<div class="card">
 				<div class="card-body">
 					<form action="/add" method= "post">
@@ -65,19 +93,26 @@
 					<input type="text" name="carrera" placeholder ="Carrera" class = "form-control">
 				</div>
 				<div class= "form-group">
+					<input type="text" name="celular" placeholder ="Celular" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="text" name="correo" placeholder ="Correo" class = "form-control">
+				</div>
+				<div class= "form-group">
 					<input type="hidden" name="created_at" value=<%=new Date().toJSON().slice(0,10); %> class = "form-control">
 				</div>
-				<button type="submit" class="btn btn-primary">
-				Guardar
-				</button>
-				
-		</form>
+				<div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
+			      </div>
+				</form>
 				</div>
 			</div>
+      </div>
 
-		</div>
-
-	</div>
+      
+    </div>
+  </div>
 </div>
 
 <% include partials/_footer %>
