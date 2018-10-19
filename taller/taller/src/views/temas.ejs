@@ -73,7 +73,7 @@
 				<tr>
 					<th>n°</th>
 					<th>Titulo</th>
-					<th>Observaciones</th>
+					<th>Estado</th>
 					<th>Fecha</th>
 					<th>Acciones</th>
 				</tr>
@@ -84,13 +84,12 @@
 						<tr>
 							<td> <%= (i+1) %></td>
 							<td><%= data[i].titulo %></td>
-							<td><%= data[i].observaciones %></td>
-							<td><%= data[i].fecha_observaciones %></td>
-							
-							
+							<td><%= data[i].estado %></td>
+							<td><%= data[i].fecha_observaciones %></td>					
 							<td> <a href="/deleteTema/<%= data[i].id_tema %>" class="btn btn-danger">Eliminar</a>
 							<a href="/updateTema/<%= data[i].id_tema %>/<%=data[i].id_alumno %>" class="btn btn-info">Actualizar</a>
-							<a href="/observaciones/<%= data[i].id_tema %> %>" class="btn btn-info">Nueva Observacion</a>
+							<a href="/observaciones/<%= data[i].id_tema %> %>" class="btn btn-info">Ver Observaciones</a>
+							<a href="/registroavance/<%= data[i].id_tema %> %>" class="btn btn-info">Avances</a>
 							</td>
 						</tr>
 					<% } %>
@@ -100,9 +99,6 @@
 			</table>
 
 		</div>
-
-		
-
 	</div>
 </div>
 <div class="modal fade" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,17 +118,13 @@
 					<input type="text" name="titulo" placeholder ="Titulo" class = "form-control">
 				</div>
 				<div class= "form-group">
-					<input type="text" name="observaciones" placeholder ="Observaciones" class = "form-control">
+					<input type="text" name="estado" placeholder ="Estado" class = "form-control">
 				</div>
 				<div class= "form-group">
-					<input type="hidden" name="fecha_observaciones" value=<%= 
-					date= new Date(Date.now()).toISOString();
-					%>>
+					<input type="hidden" name="fecha_observaciones" value=<%= date= new Date(Date.now()).toISOString();%>>
 				</div>
 				<div class= "form-group">
-					<input type="hidden" name="id_alumno" value=<%= 
-					id_alumno
-					%>>
+					<input type="hidden" name="id_alumno" value=<%= id_alumno%>>
 				</div>
 				<div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

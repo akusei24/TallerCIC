@@ -3,6 +3,7 @@ const router = express.Router();
 
 const alumnoController = require('../controllers/alumnoController');
 const temasController=require('../controllers/temasController');
+const registroController=require('../controllers/registroController');
 
 //Pantalla principal
 router.get('/',function (req,res){
@@ -29,6 +30,10 @@ router.post('/saveObservaciones',temasController.saveObservaciones);
 router.get('/updateStatus/(:id)/(:idTema)',temasController.updateStatus);
 router.get('/subirArchivo/(:id)/(:idTema)',temasController.subirArchivo);
 router.post('/upload/(:idTema)',temasController.upload);
+
+//Ventana registros
+
+router.get('/registroavance/(:idTema)',registroController.list);
 
 
 module.exports = router;
