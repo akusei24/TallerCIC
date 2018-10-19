@@ -3,11 +3,21 @@ const router = express.Router();
 
 const alumnoController = require('../controllers/alumnoController');
 const temasController=require('../controllers/temasController');
-router.get('/', alumnoController.list);
+
+//Pantalla principal
+router.get('/',function (req,res){
+	res.render('index');
+});
+
+//Pantalla alumnos
+
+router.get('/alumnos', alumnoController.list);
 router.post('/add', alumnoController.save);
 router.get('/delete/(:id)',alumnoController.delete);
 router.get('/update/(:id)',alumnoController.edit);
 router.post('/update/(:id_alumno)',alumnoController.update);
+
+//Pantalla temas
 router.get('/tema/(:id)',temasController.addTema);
 router.get('/temas/(:id)',temasController.listTema);
 router.post('/saveTema',temasController.saveTema);

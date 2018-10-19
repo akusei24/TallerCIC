@@ -19,6 +19,7 @@ controller.save = (req,res) =>{
 	req.getConnection((err,conn) =>{
 		conn.query('INSERT INTO alumnos set ?',[datos],(err, alumno) => {
 			console.log(alumno);
+			res.redirect('/alumnos');
 		//	res.send("funciona");
 		});
 	});
@@ -36,7 +37,7 @@ controller.update=(req,res)=>{
 	const newAlumno=req.body;
 	req.getConnection((err,conn)=>{
 		conn.query('UPDATE alumnos set ? WHERE id_alumno = ?', [newAlumno,id_alumno],(err,rows)=>{
-			res.redirect('0');
+			res.redirect('/alumnos');
 		});
 	});
 };
@@ -45,7 +46,7 @@ controller.delete=(req,res)=>{
 	const id=req.params.id;
 	req.getConnection((err,conn)=>{
 		conn.query('DELETE FROM alumnos WHERE id_alumno = ?',[id],(err,rows)=>{
-			res.redirect('/');
+			res.redirect('/alumnos');
 		});
 	});
 };
