@@ -7,6 +7,12 @@ controller.addTema=(req,res)=>{
 		});
 	});
 };
+function getAlumno(req,res){
+	req.getConnection((err,conn)=>{
+		const id=req.params.id;
+
+	});
+}
 controller.listTema=(req,res)=>{
 	req.getConnection((err, conn)=>{
 		const id=req.params.id;
@@ -15,10 +21,10 @@ controller.listTema=(req,res)=>{
 				res.json(err);
 			}
 			console.log(temas);
-			res.render('temas',{
-				data: temas,
-				id_alumno: id
-			});
+			conn.query('SELECT * FROM alumnos WHERE id_alumno = ?',[id],(err,alumno)=>{
+			res.render('temas',{data:temas, id_alumno:id, alumno:alumno[0]});
+		});
+			
 
 		});
 	});
