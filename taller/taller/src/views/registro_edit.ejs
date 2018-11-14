@@ -1,0 +1,40 @@
+<% include partials/_header %>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-5">
+			<div class="card-body">
+				<%=console.log("EJS"+data.id_registro);%>
+				<form action="/registro/update/<%= data.id_registro%>/<%=data.id_tema%>" method="post" accept-charset="utf-8">
+					<div class= "form-group">
+					<select class="form-control" name="estado" selected="<%=data.estado%>">
+					  <option>Tema Propuesto</option>
+					  <option>Perfil Pre-aprobado</option>
+					  <option>Perfil Aprobado</option>
+					</select>
+					</div>
+					<div class= "form-group">
+					
+				<div class= "form-group">
+					<input type="text" name="observacion" value="<%= data.observacion %>" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="file" name="archivo"  class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="id_tema" value="<%= data.id_tema %>" class = "form-control">
+				</div>
+				<div class= "form-group">
+					<input type="hidden" name="fecha_observaciones" value="<%= date= new Date(Date.now()).toISOString();%>" class = "form-control">
+				</div>
+				<button type="submit" class="btn btn-primary">
+				Actualizar
+				</button>
+				</form>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+<% include partials/_footer %>

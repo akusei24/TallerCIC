@@ -34,6 +34,10 @@ router.post('/upload/(:idTema)',temasController.upload);
 //Ventana registros
 
 router.get('/registroavance/(:idTema)',registroController.list);
+router.get('/registro/edit/(:id)',registroController.editRegistro);
+router.post('/registro/update/(:id)/(:idTema)',registroController.updateRegistro);
+router.get('/descargar/(:archivo)',registroController.download);
+router.get('/registro/delete/(:id)',registroController.deleteRegistro);
 
 
 module.exports = router;

@@ -121,11 +121,11 @@ controller.upload=(req,res)=>{
 	console.log(datos);
 	let EDFile = req.files.archivo;
 	console.log(EDFile.name);
-    EDFile.mv(`./uploads/${EDFile.name}`,err => {
+    EDFile.mv(`../uploads/${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
         //return res.status(200).send({ message : 'File upload' })
-    	datos["archivo"]="./uploads/"+EDFile.name;
+    	datos["archivo"]=EDFile.name;
     	req.getConnection((err,conn)=>{
     		conn.query('INSERT  INTO registro set  ? ',[datos],(err,rows)=>{
     		res.redirect('/registroavance/'+idTema);
