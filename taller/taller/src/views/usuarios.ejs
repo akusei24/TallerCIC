@@ -1,0 +1,47 @@
+<% include partials/_header %>
+
+<div>
+	<div class ="row mt-2">
+			<div class="col-md-9 offset-md-1 ">
+				<div class="form-inline">
+				<div class="col-md-10 ">
+				<h2>Tabla de Usuarios</h2>
+				</div>
+					
+					
+				</div>
+			</div>
+	</div>
+	<div class = "row mt-2">
+		<div class="col-md-9 offset-md-1">
+			<table class= "table table-bordered table-hover">
+			<thread>
+				<tr>
+					<th>N°</th>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th>Password</th>				
+					<th>Acciones</th>
+				</tr>
+			</thread>
+			<tbody>
+				<% if (data) { %>
+					<% for (var i=0; i <data.length; i++){ %>
+						<tr>
+							<td> <%= (i+1) %></td>
+							<td><%= data[i].nombre %></td>
+							<td><%= data[i].email %></td>
+							<td><%= data[i].password%></td>
+							<td>
+							 <a class="fa fa-trash" href="/admin/delete/<%= data[i].id_usuario %>" >Eliminar</a>
+							<a class="fa fa-edit"href="/admin/update/<%= data[i].id_usuario %>">Editar</a>
+							</td>
+						</tr>
+					<% } %>
+
+				<% } %>
+			</tbody>
+			</table>
+		</div>		
+	</div>
+</div>

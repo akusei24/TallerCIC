@@ -2,22 +2,25 @@
 
 <div>
 	<div class ="row mt-2">
-			<div class="col-md-12">
+			<div class="col-md-9 offset-md-1 ">
 				<div class="form-inline">
-				<div class="col-md-10">
+				<div class="col-md-10 ">
 				<h2>Tabla de Estudiantes</h2>
 				</div>
+					<% if(user.rol!="Estudiante"){ %>
 					<div class="col-md-2">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-agregar">
+
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i>
 					  Agregar Alumno
 					</button>
 
 					</div>
+					<% } %>
 				</div>
 			</div>
 	</div>
 	<div class = "row mt-2">
-		<div class="col-md-12">
+		<div class="col-md-9 offset-md-1">
 			<table class= "table table-bordered table-hover">
 			<thread>
 				<tr>
@@ -47,9 +50,13 @@
 							<td><%= data[i].celular %></td>
 							<td><%= data[i].correo %></td>
 							
-							<td> <a href="/delete/<%= data[i].id_alumno %>" class="btn btn-danger">Eliminar</a>
-							<a href="/update/<%= data[i].id_alumno %>" class="btn btn-info">Editar</a>
-							<a href="/tema/<%= data[i].id_alumno %>" class="btn btn-info">Ver tema</a>
+							<td>
+							<% if (user.rol!="Estudiante"){%>
+							 <a class="fa fa-trash" href="/delete/<%= data[i].id_alumno %>" >Eliminar</a>
+							<a class="fa fa-edit"href="/update/<%= data[i].id_alumno %>">Editar</a>
+							<% } %>
+							<a  class="fa fa-info-circle"
+								href="/temas/<%= data[i].id_alumno %>">Ver tema</a>
 							</td>
 						</tr>
 					<% } %>

@@ -2,10 +2,13 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql');
+const flash=require('connect-flash');
+const session=require('express-session');
+const passport=require('passport');
 const myConnection = require('express-myconnection');
 const fileUpload=require('express-fileupload');
 const app = express();
-
+require('./passport/passport')(passport);
 //importing routes
 
 const alumnorutas = require('./routes/alumno');
@@ -28,6 +31,14 @@ app.use(myConnection(mysql, {
 },'single'));
 app.use(express.urlencoded({extended: false}));
 app.use(fileUpload());
+app.use(flash());
+app.use(session({
+	secret: 'hide',
+	resave:false,
+	saveUninitialized:false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 //rutas
 
 app.use('/', alumnorutas);

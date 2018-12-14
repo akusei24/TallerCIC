@@ -1,3 +1,4 @@
+const url= require('url');
 const controller = {};
 
 controller.list = (req,res) =>{
@@ -9,7 +10,8 @@ controller.list = (req,res) =>{
 			}
 			res.render('registroavance',{
 				data: registro,
-				id_tema:id
+				id_tema:id,
+				isAuthenticated:req.isAuthenticated,user:req.user
 			});
 		});
 	});
@@ -20,7 +22,7 @@ controller.editRegistro=(req,res)=>{
 	req.getConnection((err,conn)=>{
 		conn.query('SELECT * FROM registro WHERE id_registro = ?',[id],(err,avance)=>{
 			console.log(avance[0]);
-			res.render('registro_edit',{data:avance[0]});
+			res.render('registro_edit',{data:avance[0],isAuthenticated:req.isAuthenticated,user:req.user});
 		});
 
 	});
@@ -49,7 +51,14 @@ controller.updateRegistro=(req,res)=>{
     	console.log(newRegistro);
     	req.getConnection((err,conn)=>{
     		conn.query('UPDATE registro set ? WHERE id_registro = ?', [newRegistro,id],(err,rows)=>{
-    		res.redirect('/registroavance/'+idTema);
+    		res.redirect(url.format({
+       				pathname:"/registroavance/"+idTema,
+       				query: {
+					"isAuthenticated": req.isAuthenticated,
+          			"user":req.user
+        }
+     }));
+    		//res.redirect('/registroavance/'+idTema,{isAuthenticated:req.isAuthenticated,user:req.user});
     	});
     	
     	});

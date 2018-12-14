@@ -6,7 +6,7 @@
 		<div class="row mt-2">
 		
 	
-	<div class="col-md-12">
+	<div class="col-md-10 offset-md-2">
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
@@ -54,20 +54,22 @@
 	</div>
 	</div>
 	</div>
+	<%  if (user.rol!="Estudiante"){%>
 	<div class="col">
-		<div class="row mt-5">
-		<div class="col-md-2">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-agregar">
+		<div class="row mt-3">
+		<div class="col-md-2 offset-md-1">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i>
 					  Agregar Tema
 					</button>
 		
 					</div>
 		</div>
 	</div>
+	<% } %>
 	</div>
 	
 	<div class = "row mt-5">
-		<div class="col-md-7">
+		<div class="col-md-8 offset-md-1">
 			<table class= "table table-bordered table-hover">
 			<thread>
 				<tr>
@@ -85,10 +87,14 @@
 							<td> <%= (i+1) %></td>
 							<td><%= data[i].titulo %></td>
 							<td><%= data[i].estado %></td>
-							<td><%= data[i].fecha_observaciones %></td>					
-							<td> <a href="/deleteTema/<%= data[i].id_tema %>" class="btn btn-danger">Eliminar</a>
-							<a href="/updateTema/<%= data[i].id_tema %>/<%=data[i].id_alumno %>" class="btn btn-info">Actualizar</a>
-							<a href="/registroavance/<%= data[i].id_tema %> %>" class="btn btn-info">Avances</a>
+							<td><%= data[i].fecha_observaciones %></td>
+												
+							<td> 
+							<% if (user.rol!="Estudiante"){%>
+							<a class="fa fa-trash" href="/deleteTema/<%= data[i].id_tema %>" >Eliminar</a>
+							<a class="fa fa-edit"href="/updateTema/<%= data[i].id_tema %>/<%=data[i].id_alumno %>">Actualizar</a>
+							<% } %>
+							<a class="fa fa-info-circle"href="/registroavance/<%= data[i].id_tema %> %>">Avances</a>
 							</td>
 						</tr>
 					<% } %>
